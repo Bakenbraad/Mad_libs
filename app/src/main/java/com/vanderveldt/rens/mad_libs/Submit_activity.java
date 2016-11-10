@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
+import android.preference.PreferenceManager;
 import static android.preference.PreferenceManager.*;
 import static android.view.View.VISIBLE;
 import static java.lang.String.format;
@@ -23,6 +23,7 @@ import static java.lang.String.format;
 public class Submit_activity extends AppCompatActivity {
 
     String word;
+    String name;
     boolean Init = false;
     TextView welcomeTV;
     TextView wordsToGoTV;
@@ -36,8 +37,8 @@ public class Submit_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_activity);
 
-        SharedPreferences prefs = getDefaultSharedPreferences(this);
-        String name = prefs.getString("name", "");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        name = prefs.getString("name", "Rens");
 
         welcomeTV = (TextView) findViewById(R.id.welcomeText);
         welcomeTV.setText(format("Welcome %s !", name));
@@ -61,39 +62,40 @@ public class Submit_activity extends AppCompatActivity {
 
              // Set amount of words to go
             wordsToGoTV = (TextView) findViewById(R.id.wordsToGo);
-            int wordsToGo = story.getPlaceholderRemainingCount();
-            String wordsToGos = Integer.toString(wordsToGo);
-            wordsToGoTV.setText(format("%s words to go!", wordsToGos));
+            wordsToGoTV.setText(format("%s word(s) to go!", Integer.toString(story.getPlaceholderRemainingCount())));
 
             // Make sure this only runs once.
             Init = true;
         }
+        else {
+            wordsToGoTV.setText(format("%s word(s) to go!", Integer.toString(story.getPlaceholderRemainingCount())));
+            // Check if all words are filled in
+            if (!story.isFilledIn()) {
+                // Get words from fill-in
+                wordSet = (EditText) findViewById(R.id.submitField);
+                word = wordSet.getText().toString();
 
-        // Check if all words are filled in
-        if (!story.isFilledIn()) {
-            // Get words from fill-in
-            EditText wordSet = (EditText) findViewById(R.id.submitField);
-            word = wordSet.getText().toString();
+                // Reset filled in word and set hint to next placeholder
+                wordSet.setText("");
+                wordSet.setHint(story.getNextPlaceholder());
 
-            // Reset filled in word and set hint to next placeholder
-            wordSet.setText("");
-            wordSet.setHint(story.getNextPlaceholder());
-            if (word.length() == 0){
-                Toast toast = Toast.makeText(this, "Please enter a word", Toast.LENGTH_SHORT);
-                toast.show();
+                if (word.length() == 0) {
+                    Toast toast = Toast.makeText(this, "Please enter a word", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    story.fillInPlaceholder(word);
+                    wordsToGoTV.setText(format("%s word(s) to go!", Integer.toString(story.getPlaceholderRemainingCount())));
+                }
             }
-            else {
-                story.fillInPlaceholder(word);
-            }
-        }
 
-        // Submit all words as a story to the next activity and clean the story
-        if (story.isFilledIn()) {
-            Intent goToStoryActivity = new Intent(this, Story_activity.class);
-            goToStoryActivity.putExtra("story", story.toString());
-            story.clear();
-            finish();
-            startActivity(goToStoryActivity);
+            // Submit all words as a story to the next activity and clean the story
+            if (story.isFilledIn()) {
+                Intent goToStoryActivity = new Intent(this, Story_activity.class);
+                goToStoryActivity.putExtra("story", story.toString());
+                finish();
+                startActivity(goToStoryActivity);
+                story.clear();
+            }
         }
     }
 }

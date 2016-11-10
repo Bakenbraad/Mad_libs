@@ -11,19 +11,6 @@
     tools:context="com.vanderveldt.rens.mad_libs.Submit_activity">
 
 
-
-    <TextView
-        android:text="@string/please_enter_words_to_complete_the_story"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/wordFill"
-        android:layout_marginTop="51dp"
-        android:layout_below="@+id/welcomeText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-
     <TextView
         android:text="@string/welcometext"
         android:layout_width="wrap_content"
@@ -37,9 +24,20 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:gravity="center"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+
+        <TextView
+            android:text="@string/please_enter_words_to_complete_the_story"
+            android:layout_width="match_parent"
+            android:textSize="20sp"
+            android:id="@+id/wordFill"
+            android:gravity="center"
+            android:layout_marginTop="51dp"
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/submitField"

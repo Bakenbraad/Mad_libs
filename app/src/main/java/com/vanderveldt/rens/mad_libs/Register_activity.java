@@ -35,6 +35,7 @@ public class Register_activity extends AppCompatActivity {
         if (!(name.length() == 0)) {
             SharedPreferences.Editor editor = sharedpreferences.edit();
             editor.putString("name", name);
+            editor.apply();
             editor.putBoolean("login", true);
             editor.apply();
             forward();
