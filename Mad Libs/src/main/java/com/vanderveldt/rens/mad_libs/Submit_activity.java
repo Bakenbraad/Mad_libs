@@ -56,22 +56,16 @@ public class Submit_activity extends AppCompatActivity {
             int random = (int )(Math.random() * 5 + 1);
             switch(random){
                 case 1: stream = this.getResources().openRawResource(R.raw.madlib0_simple);
-                        story = new Story(stream);
                         break;
                 case 2: stream = this.getResources().openRawResource(R.raw.madlib1_tarzan);
-                        story = new Story(stream);
                         break;
                 case 3: stream = this.getResources().openRawResource(R.raw.madlib2_university);
-                        story = new Story(stream);
                         break;
                 case 4: stream = this.getResources().openRawResource(R.raw.madlib3_clothes);
-                        story = new Story(stream);
                         break;
                 case 5: stream = this.getResources().openRawResource(R.raw.madlib4_dance);
-                        story = new Story(stream);
                         break;
             }
-            stream = this.getResources().openRawResource(R.raw.madlib0_simple);
             story = new Story(stream);
 
             // Set the submit field to the right hint and make it visible
