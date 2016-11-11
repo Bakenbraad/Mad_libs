@@ -1,4 +1,4 @@
-## Readme MadLibs
+# Readme MadLibs
 
 Mad libs is an app that supports custom story creation.
 A user is promted for his/her name the first time they enter.
@@ -17,6 +17,6 @@ Extra functions:
 - Custom edittext and button themes!
 - Landscape support
 
-# By Rens van der Veldt
-#    10766162
-#    UvA minor programmeren
+##### By Rens van der Veldt
+#####    10766162
+#####    UvA minor programmeren
