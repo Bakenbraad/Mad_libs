@@ -25,8 +25,6 @@ public class Register_activity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_activity);
-
-
     }
 
     public void saveName(View view) {
@@ -45,7 +43,9 @@ public class Register_activity extends AppCompatActivity {
             toast.show();
         }
     }
-
+    public void onBackPressed() {
+        finish();
+    }
     public void forward() {
         name = sharedpreferences.getString("name", "");
         if (!(name.length() == 0)) {

@@ -22,10 +22,12 @@ public class Story_activity extends AppCompatActivity {
     public void onBackPressed() {
         Intent goToSubmitActivity = new Intent(this, Submit_activity.class);
         startActivity(goToSubmitActivity);
+        finish();
     }
 
     public void backToSubmit(View view) {
         Intent goToSubmitActivity = new Intent(this, Submit_activity.class);
         startActivity(goToSubmitActivity);
+        finish();
     }
 }
